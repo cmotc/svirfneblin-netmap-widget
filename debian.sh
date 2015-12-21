@@ -1,11 +1,11 @@
 #! /bin/sh
 # Configure your paths and filenames
 SOURCEBINPATH=.
-SOURCEDIR=netmap/
-SOURCEBIN=netmap/canlestick.lua
+LAUNCHER=netmap-conky
+SOURCEBIN=conkynmrc.conf
 SOURCEDOC=README.md
 INSTALLDOC=INSTALL.md
-DEBFOLDER=svirfneblin-netmonitor-widget
+DEBFOLDER=svirfneblin-netmap-widget
 
 DEBVERSION=$(date +%Y%m%d)
 
@@ -40,12 +40,11 @@ dpkg-source --commit
 
 # debian/install must contain the list of scripts to install 
 # as well as the target directory
-echo etc/xdg/svirfneblin/rc.lua.candlestick.example etc/xdg/svirfneblin >> debian/install
-echo etc/xdg/svirfneblin/$SOURCEBIN etc/xdg/svirfneblin/$SOURCEDIR >> debian/install
+echo etc/$SOURCEBIN etc >> debian/install
+echo usr/bin/$LAUNCHER usr/bin >> debian/install
 cp $SOURCEDOC usr/share/doc/$DEBFOLDER/$SOURCEDOC
 cp $INSTALLDOC usr/share/doc/$DEBFOLDER/$INSTALLDOC
 cp $HACKDOC usr/share/doc/$DEBFOLDER/$HACKDOC
-
 echo usr/share/doc/$DEBFOLDER/$SOURCEDOC usr/share/doc/$DEBFOLDER >> debian/install
 echo usr/share/doc/$DEBFOLDER/$INSTALLDOC usr/share/doc/$DEBFOLDER >> debian/install
 echo usr/share/doc/$DEBFOLDER/$HACKDOC usr/share/doc/$DEBFOLDER >> debian/install
@@ -62,7 +61,7 @@ Homepage: https://www.github.com/cmotc/svirfneblin-netmonitor-widget
 
 Package: $DEBFOLDER
 Architecture: all
-Depends: lightdm, lightdm-gtk-greeter, awesome (>= 3.4), svirfneblin-panel \${misc:Depends}
+Depends: lightdm, lightdm-gtk-greeter, awesome (>= 3.4), svirfneblin-panel, svirfneblin-netmonitor-widget, conky-clicky \${misc:Depends}
 Description: A network monitoring widget for awesomewm
 " > debian/control
 
