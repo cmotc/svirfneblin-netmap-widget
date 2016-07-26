@@ -28,18 +28,18 @@ cd $DEBFOLDERNAME
 pwd
 
 # Create the packaging skeleton (debian/*)
-dh_make -s --indep --createorig 
+dh_make --indep --createorig
 
 mkdir -p debian/tmp/usr
 cp -R usr debian/tmp/usr
 
 # Remove make calls
-grep -v makefile debian/rules > debian/rules.new 
-mv debian/rules.new debian/rules 
+grep -v makefile debian/rules > debian/rules.new
+mv debian/rules.new debian/rules
 
 dpkg-source --commit
 
-# debian/install must contain the list of scripts to install 
+# debian/install must contain the list of scripts to install
 # as well as the target directory
 echo etc/$SOURCEBIN etc >> debian/install
 echo usr/bin/$LAUNCHER usr/bin >> debian/install
@@ -74,7 +74,7 @@ Description: A network monitoring widget for awesomewm
 rm debian/*.ex
 rm debian/*.EX
 
-dpkg-source --commit
+#dpkg-source --commit
 
 # Build the package.
 # You  will get a lot of warnings and ../somescripts_0.1-1_i386.deb
